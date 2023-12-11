@@ -2,6 +2,12 @@
   "src": [
     "pages/Index",
     "pages/Home",
-    "pages/Tabber"
+    "pages/Tabber",
+    "pages/Category",
+    "pages/Page",
+    "pages/Server",
+    "pages/Car",
+    "pages/My",
+    "pages/Page"
   ]
 }

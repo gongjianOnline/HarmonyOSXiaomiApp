@@ -4,12 +4,21 @@ import window from '@ohos.window';
 
 export default class EntryAbility extends UIAbility {
   onCreate(want, launchParam) {
+    /*设置状态栏透明*/
     let promise = window.getLastWindow(this.context);
     promise.then((data)=>{
       let windowClass = data;
       // 隐藏顶部状态栏背景
       windowClass.setWindowLayoutFullScreen(true);
     })
+
+    window.getLastWindow(this.context, (err, data) => {
+      let type = window.AvoidAreaType.TYPE_SYSTEM;
+      let avoidArea = data.getWindowAvoidArea(type);
+      console.log("-------------")
+      console.log(JSON.stringify(avoidArea))
+      globalThis.avoidArea = avoidArea.topRect.height;
+    });
   }
 
   onDestroy() {

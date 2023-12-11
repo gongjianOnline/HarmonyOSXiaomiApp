@@ -1,4 +1,8 @@
 import Home  from "./Home"
+import Category from "./Category"
+import Server from "./Server"
+import Car from "./Car"
+import My from "./My"
 @Entry
 @Component
 struct Tabber {
@@ -6,11 +10,14 @@ struct Tabber {
   @State tabsIndex:number = 0;
   private tabsController:TabsController = new TabsController();
 
-  @Builder TabBarComponents(name:string,index:number,selectedImg:string,normalImg:string){
+  @Builder TabBarComponents(name:string,index:number,IconUrl:Resource,IconActivated:Resource){
     /*上图标下文字布局*/
     Column(){
       /*判断当前选中下标是否为当前菜单数,三目运算切换按钮颜色*/
-      Image(this.tabsIndex === index?selectedImg:normalImg).width(30)
+      // Image(this.tabsIndex === index?selectedImg:normalImg).width(30)
+      Image(this.tabsIndex === index?IconActivated:IconUrl)
+        .width(25)
+        .margin({bottom:4})
       Text(name)
         .fontColor(this.tabsIndex === index?'#fc6b1c' : '#454545')
         .fontSize(12)
@@ -39,7 +46,27 @@ struct Tabber {
           /*当前tabbar要显示的页签内容*/
           Home()
         }
-        .tabBar(this.TabBarComponents("首页",0,"https://z1.ax1x.com/2023/11/29/piD6doV.png","https://z1.ax1x.com/2023/11/29/piD6tLn.png"))
+        .tabBar(this.TabBarComponents("首页",0,$r('app.media.home'),$r("app.media.homeActivated")))
+        TabContent(){
+          /*当前tabbar要显示的页签内容*/
+          Category()
+        }
+        .tabBar(this.TabBarComponents("分类",1,$r('app.media.category'),$r("app.media.categoryActivated")))
+        TabContent(){
+          /*当前tabbar要显示的页签内容*/
+          Server()
+        }
+        .tabBar(this.TabBarComponents("服务",2,$r('app.media.server'),$r("app.media.serverActivated")))
+        TabContent(){
+          /*当前tabbar要显示的页签内容*/
+          Car()
+        }
+        .tabBar(this.TabBarComponents("购物车",3,$r('app.media.car'),$r("app.media.carActivated")))
+        TabContent(){
+          /*当前tabbar要显示的页签内容*/
+          My()
+        }
+        .tabBar(this.TabBarComponents("我的",4,$r('app.media.my'),$r("app.media.myActivated")))
       }
       .barWidth('100%')
       .barHeight(60)
