@@ -16,14 +16,14 @@ struct Tabber {
       /*判断当前选中下标是否为当前菜单数,三目运算切换按钮颜色*/
       // Image(this.tabsIndex === index?selectedImg:normalImg).width(30)
       Image(this.tabsIndex === index?IconActivated:IconUrl)
-        .width(25)
+        .width(18)
         .margin({bottom:4})
       Text(name)
         .fontColor(this.tabsIndex === index?'#fc6b1c' : '#454545')
-        .fontSize(12)
+        .fontSize(10)
     }
     .width('100%')
-    .height(60)
+    .height(50)
     .justifyContent(FlexAlign.Center)
     .backgroundColor("#ffffff")
     .border({
