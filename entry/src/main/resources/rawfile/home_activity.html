@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>活动页面</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+        }
+        .swapper{
+            width:100%;
+            height:200vp;
+            position: relative;
+        }
+        .swapper>img{
+            width:100%;
+            height:100%;
+        }
+        .titleContainer{
+            position: absolute;
+            top: 1em;
+            left: 1.5em;
+        }
+        .titleA{
+            font-size: 1em;
+            font-weight: bold;
+            margin-bottom: 0.2em;
+        }
+        .titleB{
+            font-size: 0.8em;
+        }
+        .productContainer{
+            position: absolute;
+            right: 0.5em;
+            bottom: 1em;
+            top: 1em;
+            width: 46%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .productContainer>div{
+            width: 100%;
+            height: 48%;
+            background: #fdfcfa;
+            border-radius: 0.5em;
+            display: flex;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        .productContent{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1em;
+            width: 55%;
+            font-size: 0.8em;
+            padding: 0.8em 0px 0.8em 0.8em;
+        }
+        .productImg{
+            width: 40%;
+            height: 100%;
+            overflow:hidden;
+            padding: 0.8em 0px 0.8em 0px;
+        }
+        .productImg>img{
+            width: 100%;
+            height: 100%;
+        }
+        .productTitleA{
+            font-size: 1em;
+            padding-bottom: 0.2em;
+        }
+        .productTitleB{
+            font-size: 0.8em;
+            color: #7a7977;
+        }
+        .productButton{
+            font-size: 1em;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="swapper">
+        <img src="./img/home_activityBg.jpg" alt="">
+        <div class="titleContainer">
+            <article class="titleA">手机上新季</article>
+            <article class="titleB">24期免息</article>
+        </div>
+        <div class="productContainer">
+            <div>
+                <div class="productContent">
+                    <div>
+                        <article class="productTitleA">潮电风向标</article>
+                        <article class="productTitleB">空调低至1699起</article>
+                    </div>
+                    <div>
+                        <article class="productButton">进入会场</article>
+                    </div>
+                </div>
+                <div class="productImg">
+                    <img src="./img/home_activityA.jpg" alt="">
+                </div>
+            </div>
+
+            <div>
+                <div class="productContent">
+                    <div>
+                        <article class="productTitleA">电视焕新季</article>
+                        <article class="productTitleB">至高12期免息</article>
+                    </div>
+                    <div>
+                        <article class="productButton">进入会场</article>
+                    </div>
+                </div>
+                <div class="productImg" style="padding-right: 0.6em;">
+                    <img src="./img/home_activityB.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

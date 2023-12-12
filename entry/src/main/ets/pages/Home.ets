@@ -1,9 +1,12 @@
+import web_webview from '@ohos.web.webview';
+
 @Entry
 @Component
 export default struct Home {
   @State message: string = 'Hello World'
   private swiperController: SwiperController = new SwiperController()
   avoidArea = globalThis.avoidArea;
+  webviewController: web_webview.WebviewController = new web_webview.WebviewController();
 
   /*头部搜索栏*/
   @Builder Header(){
@@ -214,6 +217,15 @@ export default struct Home {
   }
 
 
+  /*活动窗口*/
+  @Builder Activity(){
+    Web({src:$rawfile("home_activity.html"),controller:this.webviewController})
+      .height(220)
+      .width("100%")
+      .padding({left:10,right:10})
+  }
+
+
   build() {
     Column(){
       Stack({alignContent:Alignment.TopStart }){
@@ -226,6 +238,8 @@ export default struct Home {
           ListItem(){this.Assure()}
           /*两行五列*/
           ListItem(){this.Classify()}
+          /*活动窗口*/
+          ListItem(){this.Activity()}
         }.zIndex(1)
 
 
