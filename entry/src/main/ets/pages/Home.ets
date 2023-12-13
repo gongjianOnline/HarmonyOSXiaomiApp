@@ -7,6 +7,7 @@ export default struct Home {
   private swiperController: SwiperController = new SwiperController()
   avoidArea = globalThis.avoidArea;
   webviewController: web_webview.WebviewController = new web_webview.WebviewController();
+  webviewController2: web_webview.WebviewController = new web_webview.WebviewController();
 
   /*头部搜索栏*/
   @Builder Header(){
@@ -219,11 +220,106 @@ export default struct Home {
 
   /*活动窗口*/
   @Builder Activity(){
-    Web({src:$rawfile("home_activity.html"),controller:this.webviewController})
-      .height(220)
-      .width("100%")
-      .padding({left:10,right:10})
+    /*结合List和web组件使用的时候,web组件会影响List的上下滑动,解决方案是将 Column 组件高度嵌套到 web 中,并将高度降为0*/
+    Row(){
+      RelativeContainer(){
+        Row(){
+          Image($r("app.media.home_activityBg")).width("100%").height("100%").borderRadius(10)
+        }
+          .width("100%")
+          .height(200)
+          .id("activity_background")
+          .padding({left:10,right:10})
+          .alignRules({
+            top: { anchor: '__container__', align: VerticalAlign.Top },
+            left: { anchor: '__container__', align: HorizontalAlign.End },
+          })
+        /*顶部标题*/
+        Column(){
+          Text("手机尚新机")
+            .fontSize(18)
+            .fontWeight(FontWeight.Bold)
+          Text("最高24期免息")
+            .fontSize(12)
+            .margin({top:4})
+        }
+          .width("40%")
+          .height(60)
+          .margin({left:10})
+          .padding({left:10,top:10})
+          .alignItems(HorizontalAlign.Start)
+          .id("activity_title")
+          .alignRules({
+            top: { anchor: 'activity_background', align: VerticalAlign.Top },
+            left: { anchor: 'activity_background', align: HorizontalAlign.Start },
+          })
+
+        /*左侧菜单栏*/
+        Column(){
+          Row(){
+            Column(){
+              Column(){
+                Text("潮电风向标").fontSize(12).fontWeight(500).margin({bottom:4})
+                Text("空调低至1699起").fontSize(10).fontColor("#81807e")
+              }.alignItems(HorizontalAlign.Start)
+              Text("进入会场>").fontSize(10).fontWeight(500)
+            }.width("55%")
+              .height("100%")
+              .padding({left:6,top:8,bottom:10})
+              .justifyContent(FlexAlign.SpaceBetween)
+              .alignItems(HorizontalAlign.Start)
+            Column(){
+              Image($r("app.media.home_activityA")).objectFit(ImageFit.Cover)
+            }.width("45%").height("100%").padding(10)
+          }
+          .width("100%")
+          .height("45%")
+          .backgroundColor("#fefefc")
+          .borderRadius(10)
+
+          Row(){
+            Column(){
+              Column(){
+                Text("电视焕新季").fontSize(12).fontWeight(500).margin({bottom:4})
+                Text("至高12期免息").fontSize(10).fontColor("#81807e")
+              }.alignItems(HorizontalAlign.Start)
+              Text("进入会场>").fontSize(10).fontWeight(500)
+            }.width("45%")
+            .height("100%")
+            .padding({left:6,top:8,bottom:10})
+            .justifyContent(FlexAlign.SpaceBetween)
+            .alignItems(HorizontalAlign.Start)
+            Column(){
+              Image($r("app.media.home_activityB")).objectFit(ImageFit.Cover)
+            }.width("55%").height("100%").padding(10)
+          }
+          .width("100%")
+          .height("45%")
+          .backgroundColor("#fefefc")
+          .borderRadius(10)
+        }.id("activity_List")
+          .height("100%")
+          .width("50%")
+          .padding({right:18,top:4,bottom:4})
+          .justifyContent(FlexAlign.SpaceAround)
+          .alignRules({
+            top: { anchor: 'activity_background', align: VerticalAlign.Top },
+            left: { anchor: 'activity_background', align: HorizontalAlign.Center },
+          })
+
+
+      }
+    }.width("100%").height(200).borderRadius(10)
+
+
   }
+
+  /*新品窗口*/
+  @Builder NewProduct(){
+      // Column(){}.width("100%").height(800).backgroundColor(Color.Red)
+  }
+
+
 
 
   build() {
@@ -240,6 +336,8 @@ export default struct Home {
           ListItem(){this.Classify()}
           /*活动窗口*/
           ListItem(){this.Activity()}
+          /*新品窗口*/
+          // ListItem(){this.NewProduct()}
         }.zIndex(1)
 
 
