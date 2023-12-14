@@ -5,6 +5,7 @@ import web_webview from '@ohos.web.webview';
 export default struct Home {
   @State message: string = 'Hello World'
   private swiperController: SwiperController = new SwiperController()
+  private swiperController2: SwiperController = new SwiperController()
   avoidArea = globalThis.avoidArea;
   webviewController: web_webview.WebviewController = new web_webview.WebviewController();
   webviewController2: web_webview.WebviewController = new web_webview.WebviewController();
@@ -431,6 +432,105 @@ export default struct Home {
         .padding({left:10,right:10})
   }
 
+  /*智能好物*/
+  @Builder GoodThing(){
+    Column(){
+      Row(){
+        Text("智能好物").fontSize(16)
+        Text("更多").fontSize(12).fontColor("#818181")
+      }.justifyContent(FlexAlign.SpaceBetween).padding({left:10,right:10,top:10,bottom:10}).width("100%")
+
+      Grid(){
+        GridItem(){
+          Swiper(this.swiperController2){
+            Column(){
+              Text("Xiaomi Pad 6 Pro").fontSize(16).fontWeight(600).margin({bottom:8})
+              Text("下单立省150元").fontSize(12).fontColor("#999a9e").margin({bottom:8})
+              Text("￥2349起").fontSize(15).margin({bottom:15})
+              Image($r("app.media.GoodThing_swiper")).height(130)
+            }
+            .width("100%")
+            .height("100%")
+            .padding({left:10,right:10})
+            .justifyContent(FlexAlign.Center)
+
+            Column(){
+              Text("Xiaomi Pad 6 Pro").fontSize(16).fontWeight(600).margin({bottom:8})
+              Text("下单立省150元").fontSize(12).fontColor("#999a9e").margin({bottom:8})
+              Text("￥2349起").fontSize(15).margin({bottom:15})
+              Image($r("app.media.GoodThing_swiper")).height(130)
+            }
+            .width("100%")
+            .height("100%")
+            .padding({left:10,right:10})
+            .justifyContent(FlexAlign.Center)
+          }
+          .loop(true)
+          .autoPlay(true)
+          .interval(3000)
+          .indicatorStyle({
+            color:"#ededed",
+            selectedColor:"#a6a6a6",
+            bottom:0
+          })
+        }
+        .rowStart(1)
+        .rowEnd(2)
+        .backgroundColor("#f5f6fa")
+        .borderRadius(10)
+
+        GridItem(){
+          Row(){
+            Column(){
+              Text("Xiaomi Buds 4").fontSize(13).fontWeight(600).margin({bottom:10})
+              Text("半入耳主动降噪").fontSize(12).fontColor("#949599").margin({bottom:10})
+              Text("立即查看").fontSize(12)
+            }.width("60%").height("100%").justifyContent(FlexAlign.Center).alignItems(HorizontalAlign.Start).padding({left:8})
+            Column(){Image($r("app.media.home_GoodThingA")).height(60)}.width("40%").height("100%").justifyContent(FlexAlign.Center)
+          }.width("100%").height("100%")
+        }.backgroundColor("#f5f6fa").borderRadius(10)
+
+        GridItem(){
+          Row(){
+            Column(){
+              Text("XiaomiWatch S2").fontSize(13).fontWeight(600).margin({bottom:10})
+              Text("支持身体成分测量").fontSize(12).fontColor("#949599").margin({bottom:10})
+              Text("￥799起").fontSize(12)
+            }.width("60%").height("100%").justifyContent(FlexAlign.Center).alignItems(HorizontalAlign.Start).padding({left:8})
+            Column(){Image($r("app.media.home_GoodThingB")).height(60)}.width("40%").height("100%").justifyContent(FlexAlign.Center)
+          }.width("100%").height("100%")
+        }.backgroundColor("#f5f6fa").borderRadius(10)
+        GridItem(){
+          Row(){
+            Column(){
+              Text("小米智能猫眼1S").fontSize(13).fontWeight(600).margin({bottom:10})
+              Text("红外高清夜视").fontSize(12).fontColor("#949599").margin({bottom:10})
+              Text("立即查看").fontSize(12)
+            }.width("60%").height("100%").justifyContent(FlexAlign.Center).alignItems(HorizontalAlign.Start).padding({left:8})
+            Column(){Image($r("app.media.home_GoodThingC")).height(60)}.width("40%").height("100%").justifyContent(FlexAlign.Center)
+          }.width("100%").height("100%")
+        }.backgroundColor("#f5f6fa").borderRadius(10)
+        GridItem(){
+          Row(){
+            Column(){
+              Text("小米手环 8Pro").fontSize(13).fontWeight(600).margin({bottom:10})
+              Text("搭配腕带更优惠").fontSize(12).fontColor("#949599").margin({bottom:10})
+              Text("立即查看").fontSize(12)
+            }.width("60%").height("100%").justifyContent(FlexAlign.Center).alignItems(HorizontalAlign.Start).padding({left:8})
+            Column(){Image($r("app.media.home_GoodThingD")).height(60)}.width("40%").height("100%").justifyContent(FlexAlign.Center)
+          }.width("100%").height("100%")
+        }.backgroundColor("#f5f6fa").borderRadius(10)
+      }
+      .columnsTemplate("1fr 1fr")
+      .rowsTemplate("1fr 1fr 1fr")
+      .rowsGap(6)
+      .columnsGap(6)
+      .width("100%")
+      .height(400)
+      .padding({left:10,right:10})
+
+    }.width("100%").height(440)
+  }
 
 
 
@@ -449,6 +549,10 @@ export default struct Home {
           ListItem(){this.Activity()}
           /*新品窗口*/
           ListItem(){this.NewProduct()}
+          /*智能好物*/
+          ListItem(){this.GoodThing()}
+
+          
         }.zIndex(1)
       }
     }
