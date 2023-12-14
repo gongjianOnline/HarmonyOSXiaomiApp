@@ -316,7 +316,119 @@ export default struct Home {
 
   /*新品窗口*/
   @Builder NewProduct(){
-      // Column(){}.width("100%").height(800).backgroundColor(Color.Red)
+      // Web({src:$rawfile("home_activity.html"),controller:this.webviewController})
+      //   .height(220)
+      //   .width("100%")
+      //   .padding({left:10,right:10})
+      Column(){
+        Row(){
+          Text("人气手机").fontSize(16)
+          Text("更多").fontSize(12).fontColor("#818181")
+        }.justifyContent(FlexAlign.SpaceBetween).padding({left:10,right:10,top:10,bottom:10}).width("100%")
+
+        Row(){
+          RelativeContainer(){
+            Image($r("app.media.home_NewProduct_bg"))
+              .id("NewProductBg")
+              .width("100%")
+              .height("100%")
+              .alignRules({
+                top: { anchor: '__container__', align: VerticalAlign.Top },
+                left: { anchor: '__container__', align: HorizontalAlign.End },
+              })
+              .borderRadius(10)
+
+            Column(){
+              Image($r("app.media.home_NewProduct_k70t")).width(100).margin({top:15})
+              Row(){
+                Text("3299元起").fontSize(14)
+              }
+              .width(90)
+              .height(30)
+              .borderRadius(30)
+              .padding({top:5,bottom:5})
+              .justifyContent(FlexAlign.Center)
+              .margin({top:10})
+
+              Image($r("app.media.home_NewProduct_k70")).width(110)
+
+            }
+            .id("NewProductA")
+            .width("50%")
+            .height("100%")
+            .alignRules({
+              top: { anchor: '__container__', align: VerticalAlign.Top },
+              left: { anchor: '__container__', align: HorizontalAlign.Start },
+            })
+
+            Column(){
+              Image($r("app.media.home_NewProduct_mi14t")).width(100).margin({top:15})
+              Row(){
+                Text("3999元起").fontSize(14)
+              }
+              .width(90)
+              .height(30)
+              .borderRadius(30)
+              .padding({top:5,bottom:5})
+              .justifyContent(FlexAlign.Center)
+              .margin({top:10})
+
+              Image($r("app.media.home_NewProduct_mi14")).width(110)
+            }
+            .id("NewProductB")
+            .width("50%")
+            .height("100%")
+            .alignRules({
+              top: { anchor: 'NewProductA', align: VerticalAlign.Top },
+              left: { anchor: 'NewProductA', align: HorizontalAlign.End },
+            })
+
+            /*底部商品栏*/
+            Row(){
+              Grid(){
+                GridItem(){
+                  Column(){
+                    Image($r("app.media.home_NewProduct_note13")).height(70)
+                    Text("Note 13 Pro 系列").fontSize(12).margin({top:10,bottom:8})
+                    Text("购机赠碎屏保").fontColor("#7b7c7e").fontSize(10)
+                  }
+                }
+                GridItem(){
+                  Column(){
+                    Image($r("app.media.home_NewProduct_note12")).height(70)
+                    Text("Note 12 Turbo").fontSize(12).margin({top:10,bottom:8})
+                    Text("赠小米有线耳机").fontColor("#7b7c7e").fontSize(10)
+                  }
+                }
+                GridItem(){
+                  Column(){
+                    Image($r("app.media.home_NewProduct_note13pro")).height(70)
+                    Text("Redmi K70E").fontSize(12).margin({top:10,bottom:8})
+                    Text("至高6期免息").fontColor("#7b7c7e").fontSize(10)
+                  }
+                }
+              }
+              .columnsTemplate("1fr 1fr 1fr")
+              .rowsTemplate("1fr")
+              .width("100%")
+              .height(140)
+            }
+            .width("100%")
+            .height(140)
+            .id("NewProductA_list")
+            .alignRules({
+              top: { anchor: 'NewProductBg', align: VerticalAlign.Center },
+              left: { anchor: 'NewProductBg', align: HorizontalAlign.Start },
+            })
+            .margin({top:20})
+
+          }
+        }
+        .width("100%")
+        .height(340)
+      }.width("100%")
+        .height(380)
+        .padding({left:10,right:10})
   }
 
 
@@ -326,7 +438,6 @@ export default struct Home {
     Column(){
       Stack({alignContent:Alignment.TopStart }){
         this.Header()
-
         List(){
           /*轮播*/
           ListItem(){this.Swiper()}
@@ -337,12 +448,9 @@ export default struct Home {
           /*活动窗口*/
           ListItem(){this.Activity()}
           /*新品窗口*/
-          // ListItem(){this.NewProduct()}
+          ListItem(){this.NewProduct()}
         }.zIndex(1)
-
-
       }
-
     }
     .height("100%")
     .width("100%")
