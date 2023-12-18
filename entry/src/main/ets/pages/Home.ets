@@ -235,7 +235,6 @@ export default struct Home {
 
   /*活动窗口*/
   @Builder Activity(){
-    /*结合List和web组件使用的时候,web组件会影响List的上下滑动,解决方案是将 Column 组件高度嵌套到 web 中,并将高度降为0*/
     Row(){
       RelativeContainer(){
         Row(){

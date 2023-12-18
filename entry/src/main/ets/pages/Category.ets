@@ -65,7 +65,7 @@ export default  struct Category {
                   Row(){}.width(4).height(20).margin({right:8}).backgroundColor(this.menuIndex == index?"#fb6c04":"rgba(255,255,255,0)")
                   Text(item).fontSize(14).fontWeight(this.menuIndex == index?500:400)
                 }.width("100%").justifyContent(FlexAlign.Start)
-              }.height(40).width("100%").onClick(()=>{this.menuIndex = index})
+              }.height(40).width("100%").onClick(()=>{this.menuIndex = index;console.log("鸿蒙加油")})
             },(item,index)=>`${index}`)
 
           }.padding({top:10})
