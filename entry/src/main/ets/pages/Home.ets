@@ -47,7 +47,13 @@ export default struct Home {
     .justifyContent(FlexAlign.SpaceAround)
     .alignItems(VerticalAlign.Center)
     .padding({bottom:10,top:40,left:10,right:10})
-    .backgroundColor(this.scrollerTop=="false"?Color.White:null)
+    .backgroundColor(this.scrollerTop=="false"?Color.White:"rgba(255,255,255,0.0)")
+    .animation({
+      duration: 1000,
+      curve: Curve.EaseOut,
+      iterations: 1,
+      playMode: PlayMode.Normal
+    })
   }
 
   /*轮播*/
