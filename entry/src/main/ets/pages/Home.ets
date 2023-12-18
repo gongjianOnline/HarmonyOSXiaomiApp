@@ -28,8 +28,7 @@ export default struct Home {
       Image($r("app.media.mi")).fillColor(this.scrollerTop === "false"?"#1b1b1b":Color.White).height(30)
       TextInput({
         placeholder:"红米K70",
-      })
-        .enterKeyType(EnterKeyType.Search)
+      }).enterKeyType(EnterKeyType.Search)
         .placeholderFont({
           size:15
         })
