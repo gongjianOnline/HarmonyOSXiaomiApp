@@ -1,14 +1,24 @@
 import web_webview from '@ohos.web.webview';
+import hilog from '@ohos.hilog';
 
 @Entry
 @Component
 export default struct Home {
-  @State message: string = 'Hello World'
+
+  aboutToAppear(){
+    hilog.error(0xFF00, "testTag", "%{public}s World %{public}d", "你好", 3);
+  }
+
   private swiperController: SwiperController = new SwiperController()
   private swiperController2: SwiperController = new SwiperController()
+
   avoidArea = globalThis.avoidArea;
+
   webviewController: web_webview.WebviewController = new web_webview.WebviewController();
   webviewController2: web_webview.WebviewController = new web_webview.WebviewController();
+
+  /*相应滚动*/
+  private listScroller: Scroller = new Scroller();
 
   /*头部搜索栏*/
   @Builder Header(){
@@ -30,11 +40,11 @@ export default struct Home {
       Image($r("app.media.message")).height(24).fillColor(Color.White)
     }
     .width("100%")
-    .height(this.avoidArea/1.5)
+    .height(this.avoidArea/1.4)
     .zIndex(2)
     .justifyContent(FlexAlign.SpaceAround)
     .alignItems(VerticalAlign.Center)
-    .padding({bottom:4,top:40,left:10,right:10})
+    .padding({bottom:10,top:40,left:10,right:10})
   }
 
   /*轮播*/
@@ -437,7 +447,10 @@ export default struct Home {
     Column(){
       Row(){
         Text("智能好物").fontSize(16)
-        Text("更多").fontSize(12).fontColor("#818181")
+        Text("更多")
+          .fontSize(12)
+          .fontColor("#818181")
+          .onClick(()=>{hilog.warn(0xFF00, "testTag", "%{public}s World %{public}d", "hello", 3);})
       }.justifyContent(FlexAlign.SpaceBetween).padding({left:10,right:10,top:10,bottom:10}).width("100%")
 
       Grid(){
@@ -453,6 +466,7 @@ export default struct Home {
             .height("100%")
             .padding({left:10,right:10})
             .justifyContent(FlexAlign.Center)
+            .onClick(()=>{console.log("11111")})
 
             Column(){
               Text("Xiaomi Pad 6 Pro").fontSize(16).fontWeight(600).margin({bottom:8})
@@ -532,13 +546,185 @@ export default struct Home {
     }.width("100%").height(440)
   }
 
+  /*品质生活*/
+  @Builder QualityLife(){
+    Column(){
+      Row(){
+        Text("智能好物").fontSize(16)
+        Text("更多")
+          .fontSize(12)
+          .fontColor("#818181")
+          .onClick(()=>{hilog.warn(0xFF00, "testTag", "%{public}s World %{public}d", "hello", 3);})
+      }.justifyContent(FlexAlign.SpaceBetween).padding({left:10,right:10,top:10,bottom:10}).width("100%")
+      List(){
+        ListItem(){
+          Column(){
+            RelativeContainer(){
+              Image($r("app.media.home_qualityLife"))
+                .id("qualityLife_bg")
+                .alignRules({
+                  top: { anchor: '__container__', align: VerticalAlign.Top },
+                  left: { anchor: '__container__', align: HorizontalAlign.Start }
+                })
+                .width("100%")
+                .height("100%")
+                .borderRadius(4)
+
+
+              Column(){
+                Text("温暖舒适家").fontWeight(600).fontSize(15).margin({bottom:5})
+                Text("至高优惠300元").fontSize(12)
+              }.id("qualityLife_Title")
+              .alignRules({
+                top: { anchor: 'qualityLife_bg', align: VerticalAlign.Top },
+                left: { anchor: 'qualityLife_bg', align: HorizontalAlign.Start }
+              })
+              .width("100%")
+              .height("70")
+              .alignItems(HorizontalAlign.Start)
+              .padding({top:10,left:10})
+
+              Column(){
+                Column(){
+                  Text("踢脚线电暖气2").fontSize(12).fontWeight(600).margin({bottom:10})
+                  Image($r("app.media.home_qualityLifeA")).width(100)
+                }.width("100%")
+                .height("48%")
+                .backgroundColor(Color.White)
+                .borderRadius(10)
+                .justifyContent(FlexAlign.Center)
+
+                Column(){
+                  Text("智能电暖器").fontSize(12).fontWeight(600).margin({bottom:10})
+                  Image($r("app.media.home_qualityLifeB")).height(50)
+                }.width("100%")
+                .height("48%")
+                .backgroundColor(Color.White)
+                .borderRadius(10)
+                .justifyContent(FlexAlign.Center)
+              }.id("qualityLife_List")
+              .alignRules({
+                top: { anchor: 'qualityLife_bg', align: VerticalAlign.Top },
+                right: { anchor: 'qualityLife_bg', align: HorizontalAlign.End }
+              })
+              .width("50%")
+              .height("100%")
+              .margin({right:4})
+              .justifyContent(FlexAlign.SpaceBetween)
+
+
+            }
+          }.width(250).height(160)
+        }.padding({left:10})
+        ListItem(){
+          Column(){
+            RelativeContainer(){
+              Image($r("app.media.home_qualityLife"))
+                .id("qualityLife_bg")
+                .alignRules({
+                  top: { anchor: '__container__', align: VerticalAlign.Top },
+                  left: { anchor: '__container__', align: HorizontalAlign.Start }
+                })
+                .width("100%")
+                .height("100%")
+                .objectFit(ImageFit.Cover)
+                .borderRadius(4)
+
+              Column(){
+                Text("温暖舒适家").fontWeight(600).fontSize(15).margin({bottom:5})
+                Text("至高优惠300元").fontSize(12)
+              }.id("qualityLife_Title")
+              .alignRules({
+                top: { anchor: 'qualityLife_bg', align: VerticalAlign.Top },
+                left: { anchor: 'qualityLife_bg', align: HorizontalAlign.Start }
+              })
+              .width("100%")
+              .height("70")
+              .alignItems(HorizontalAlign.Start)
+              .padding({top:10,left:10})
+
+              Column(){
+                Column(){
+                  Text("踢脚线电暖气2").fontSize(12).fontWeight(600).margin({bottom:10})
+                  Image($r("app.media.home_qualityLifeA")).width(100)
+                }.width("100%")
+                .height("48%")
+                .backgroundColor(Color.White)
+                .borderRadius(10)
+                .justifyContent(FlexAlign.Center)
+
+                Column(){
+                  Text("智能电暖器").fontSize(12).fontWeight(600).margin({bottom:10})
+                  Image($r("app.media.home_qualityLifeB")).height(50)
+                }.width("100%")
+                .height("48%")
+                .backgroundColor(Color.White)
+                .borderRadius(10)
+                .justifyContent(FlexAlign.Center)
+              }.id("qualityLife_List")
+              .alignRules({
+                top: { anchor: 'qualityLife_bg', align: VerticalAlign.Top },
+                right: { anchor: 'qualityLife_bg', align: HorizontalAlign.End }
+              })
+              .width("50%")
+              .height("100%")
+              .margin({right:4})
+              .justifyContent(FlexAlign.SpaceBetween)
+
+            }
+          }.width(250).height(160)
+        }.padding({left:10})
+      }.listDirection(Axis.Horizontal)
+    }.width("100%").height(200)
+  }
+
+  /*商品列表*/
+  @Builder RecommendList(){
+    Row(){
+      Column(){
+        Image($r("app.media.home_RecommendA")).width("100%").borderRadius({topLeft:10,topRight:10})
+        Text("8H释压舒弹纤维枕 抗菌对装").fontSize(14).fontWeight(600).margin({top:4,bottom:4}).padding({left:10,right:10})
+        Text("8H释压舒弹纤维枕 抗菌对装").width("100%").fontSize(12).fontColor("#797979").padding({left:10,right:10}).maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis })
+        Text(){
+          Span("￥99").fontColor("#303030").fontSize(14).margin({right:10})
+          Span("￥129").fontColor("#afafaf").fontSize(13).decoration({ type: TextDecorationType.LineThrough, color: "#afafaf" })
+        }.padding({left:10,right:10,top:4})
+
+      }.width("48%")
+      .height("100%")
+      .borderRadius(10)
+      .alignItems(HorizontalAlign.Start)
+      .backgroundColor("#f8f8f8")
+
+      Column(){
+        Image($r("app.media.home_RecommendA")).width("100%").borderRadius({topLeft:10,topRight:10})
+        Text("8H释压舒弹纤维枕 抗菌对装").fontSize(14).fontWeight(600).margin({top:4,bottom:4}).padding({left:10,right:10})
+        Text("8H释压舒弹纤维枕 抗菌对装").width("100%").fontSize(12).fontColor("#797979").padding({left:10,right:10}).maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis })
+        Text(){
+          Span("￥99").fontColor("#303030").fontSize(14).margin({right:10})
+          Span("￥129").fontColor("#afafaf").fontSize(13).decoration({ type: TextDecorationType.LineThrough, color: "#afafaf" })
+        }.padding({left:10,right:10,top:4})
+
+      }.width("48%")
+      .height("100%")
+      .borderRadius(10)
+      .alignItems(HorizontalAlign.Start)
+      .backgroundColor("#f8f8f8")
+
+    }.width("100%")
+    .height(250)
+    .margin({top:15})
+    .padding({left:10,right:10})
+    .justifyContent(FlexAlign.SpaceBetween)
+
+  }
 
 
   build() {
     Column(){
       Stack({alignContent:Alignment.TopStart }){
         this.Header()
-        List(){
+        List({scroller:this.listScroller}){
           /*轮播*/
           ListItem(){this.Swiper()}
           /*保证*/
@@ -551,9 +737,24 @@ export default struct Home {
           ListItem(){this.NewProduct()}
           /*智能好物*/
           ListItem(){this.GoodThing()}
+          /*品质生活*/
+          ListItem(){this.QualityLife()}
+          /*推荐列表*/
+          ListItem(){this.RecommendList()}
+          ListItem(){this.RecommendList()}
+          ListItem(){this.RecommendList()}
+          ListItem(){this.RecommendList()}
+          ListItem(){this.RecommendList()}
 
-          
-        }.zIndex(1)
+        }
+        .zIndex(1)
+        .onScroll((scrollOffset: number, scrollState: ScrollState)=>{
+          console.log(`偏移量---------------${scrollOffset}`)
+          console.log(JSON.stringify(scrollState))
+        })
+
+
+
       }
     }
     .height("100%")
