@@ -19,11 +19,13 @@ export default struct Home {
 
   /*相应滚动*/
   private listScroller: Scroller = new Scroller();
+  @State scrollerTop:string = "true";
+  @State xxx:string = "123"
 
   /*头部搜索栏*/
   @Builder Header(){
     Row(){
-      Image($r("app.media.mi")).height(30)
+      Image($r("app.media.mi")).fillColor(this.scrollerTop === "false"?"#1b1b1b":Color.White).height(30)
       TextInput({
         placeholder:"红米K70",
       })
@@ -35,9 +37,9 @@ export default struct Home {
         .width("60%")
         .height(30)
         .padding({left:13,right:10})
-        .backgroundColor("#b8b8b8")
-      Image($r("app.media.code")).height(24).fillColor(Color.White)
-      Image($r("app.media.message")).height(24).fillColor(Color.White)
+        .backgroundColor(this.scrollerTop === "false"?"rgba(195,195,195,0.5)":"rgba(255,255,255,0.6)")
+      Image($r("app.media.code")).height(24).fillColor(this.scrollerTop === "false"?"#1b1b1b":Color.White)
+      Image($r("app.media.message")).height(24).fillColor(this.scrollerTop === "false"?"#1b1b1b":Color.White)
     }
     .width("100%")
     .height(this.avoidArea/1.4)
@@ -45,6 +47,7 @@ export default struct Home {
     .justifyContent(FlexAlign.SpaceAround)
     .alignItems(VerticalAlign.Center)
     .padding({bottom:10,top:40,left:10,right:10})
+    .backgroundColor(this.scrollerTop=="false"?Color.White:null)
   }
 
   /*轮播*/
@@ -91,8 +94,8 @@ export default struct Home {
         GridItem(){
           Column(){
             Image($r("app.media.shangxin")).width("80%").height(60).objectFit(ImageFit.Cover)
-            Text("小米上新").fontSize(12).margin({top:6})
-          }
+            Text(this.scrollerTop+"").fontSize(12).margin({top:6})
+          }.onClick(()=>{this.scrollerTop = "false"})
         }
         GridItem(){
           Column(){
@@ -683,12 +686,12 @@ export default struct Home {
     Row(){
       Column(){
         Image($r("app.media.home_RecommendA")).width("100%").borderRadius({topLeft:10,topRight:10})
-        Text("8H释压舒弹纤维枕 抗菌对装").fontSize(14).fontWeight(600).margin({top:4,bottom:4}).padding({left:10,right:10})
+        Text("8H释压舒弹纤维枕 抗菌对装").fontSize(14).fontWeight(600).margin({top:10,bottom:10}).padding({left:10,right:10})
         Text("8H释压舒弹纤维枕 抗菌对装").width("100%").fontSize(12).fontColor("#797979").padding({left:10,right:10}).maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis })
         Text(){
           Span("￥99").fontColor("#303030").fontSize(14).margin({right:10})
           Span("￥129").fontColor("#afafaf").fontSize(13).decoration({ type: TextDecorationType.LineThrough, color: "#afafaf" })
-        }.padding({left:10,right:10,top:4})
+        }.padding({left:10,right:10,top:10})
 
       }.width("48%")
       .height("100%")
@@ -698,12 +701,12 @@ export default struct Home {
 
       Column(){
         Image($r("app.media.home_RecommendA")).width("100%").borderRadius({topLeft:10,topRight:10})
-        Text("8H释压舒弹纤维枕 抗菌对装").fontSize(14).fontWeight(600).margin({top:4,bottom:4}).padding({left:10,right:10})
+        Text("8H释压舒弹纤维枕 抗菌对装").fontSize(14).fontWeight(600).margin({top:10,bottom:10}).padding({left:10,right:10})
         Text("8H释压舒弹纤维枕 抗菌对装").width("100%").fontSize(12).fontColor("#797979").padding({left:10,right:10}).maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis })
         Text(){
           Span("￥99").fontColor("#303030").fontSize(14).margin({right:10})
           Span("￥129").fontColor("#afafaf").fontSize(13).decoration({ type: TextDecorationType.LineThrough, color: "#afafaf" })
-        }.padding({left:10,right:10,top:4})
+        }.padding({left:10,right:10,top:10})
 
       }.width("48%")
       .height("100%")
@@ -712,9 +715,9 @@ export default struct Home {
       .backgroundColor("#f8f8f8")
 
     }.width("100%")
-    .height(250)
-    .margin({top:15})
+    .height(280)
     .padding({left:10,right:10})
+    .margin({bottom:15})
     .justifyContent(FlexAlign.SpaceBetween)
 
   }
@@ -740,6 +743,15 @@ export default struct Home {
           /*品质生活*/
           ListItem(){this.QualityLife()}
           /*推荐列表*/
+          ListItem(){
+            Row(){
+              Text("精选推荐").fontSize(16)
+              Text("更多")
+                .fontSize(12)
+                .fontColor("#818181")
+                .onClick(()=>{hilog.warn(0xFF00, "testTag", "%{public}s World %{public}d", "hello", 3);})
+            }.justifyContent(FlexAlign.SpaceBetween).padding({left:10,right:10,top:10,bottom:10}).width("100%")
+          }
           ListItem(){this.RecommendList()}
           ListItem(){this.RecommendList()}
           ListItem(){this.RecommendList()}
@@ -748,13 +760,15 @@ export default struct Home {
 
         }
         .zIndex(1)
-        .onScroll((scrollOffset: number, scrollState: ScrollState)=>{
-          console.log(`偏移量---------------${scrollOffset}`)
-          console.log(JSON.stringify(scrollState))
+        .onScrollIndex((firstIndex: number, lastIndex: number)=>{
+          console.info('first' + firstIndex)
+          console.info('last' + lastIndex)
+          if(firstIndex<1){
+            this.scrollerTop = "true"
+          }else{
+            this.scrollerTop = "false"
+          }
         })
-
-
-
       }
     }
     .height("100%")
