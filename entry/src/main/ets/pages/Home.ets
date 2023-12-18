@@ -5,10 +5,6 @@ import hilog from '@ohos.hilog';
 @Component
 export default struct Home {
 
-  aboutToAppear(){
-    hilog.error(0xFF00, "testTag", "%{public}s World %{public}d", "你好", 3);
-  }
-
   private swiperController: SwiperController = new SwiperController()
   private swiperController2: SwiperController = new SwiperController()
 

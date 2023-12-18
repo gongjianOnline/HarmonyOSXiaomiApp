@@ -7,7 +7,7 @@ import My from "./My"
 @Component
 struct Tabber {
 
-  @State tabsIndex:number = 0;
+  @State tabsIndex:number = 1;
   private tabsController:TabsController = new TabsController();
 
   @Builder TabBarComponents(name:string,index:number,IconUrl:Resource,IconActivated:Resource){
