@@ -1,4 +1,6 @@
 
+import hilog from '@ohos.hilog';
+import util from '@ohos.util';
 import {ProductItem,ProductItemData,ProductItemSubData} from "../models/category/productList"
 
 @Entry
@@ -24,11 +26,14 @@ export default  struct Category {
   productList:Array<ProductItem> = [
     {
       tag:"Xiaomi手机",
+      key: util.generateRandomUUID(true),
       data:[
         {
           subTag:"Xiaomi MIX 系列",
+          key: util.generateRandomUUID(true),
           subData:[
             {
+              key: util.generateRandomUUID(true),
               title:"Xiaomi MIX Fold 3",
               price:8999,
               tage:true
@@ -36,39 +41,47 @@ export default  struct Category {
           ]
         },
         {
+          key: util.generateRandomUUID(true),
           subTag:"Xiaomi 数字系列",
           subData:[
             {
+              key: util.generateRandomUUID(true),
               title:"Xiaomi14 Pro",
               price:4999,
               tage:false
             },
             {
+              key: util.generateRandomUUID(true),
               title:"Xiaomi14",
               price:3999,
               tage:true
             },
             {
+              key: util.generateRandomUUID(true),
               title:"Xiaomi 13 Ultra",
               price:5999,
               tage:true
             },
             {
+              key: util.generateRandomUUID(true),
               title:"Xiaomi 13 Pro",
               price:5999,
               tage:false
             },
             {
+              key: util.generateRandomUUID(true),
               title:"Xiaomi 13 Pro",
               price:5999,
               tage:false
             },
             {
+              key: util.generateRandomUUID(true),
               title:"Xiaomi 13 Pro",
               price:5999,
               tage:false
             },
             {
+              key: util.generateRandomUUID(true),
               title:"Xiaomi 13 Pro",
               price:5999,
               tage:false
@@ -76,9 +89,76 @@ export default  struct Category {
           ]
         },
       ]
+    },
+    {
+      tag:"Redmi手机",
+      key: util.generateRandomUUID(true),
+      data:[
+        {
+          key: util.generateRandomUUID(true),
+          subTag:"K系列",
+          subData:[
+            {
+              key: util.generateRandomUUID(true),
+              title:"Redmi K70 Pro",
+              price:3299,
+              tage:true
+            },
+            {
+              key: util.generateRandomUUID(true),
+              title:"Redmi K70E",
+              price:2799,
+              tage:true
+            },
+            {
+              key: util.generateRandomUUID(true),
+              title:"Redmi K60 至尊版",
+              price:2799,
+              tage:true
+            }
+          ]
+        },
+        {
+          subTag:"Note系列",
+          key: util.generateRandomUUID(true),
+          subData:[
+            {
+              key: util.generateRandomUUID(true),
+              title:"Redmi Note 13 Pro",
+              price:1399,
+              tage:true
+            },
+            {
+              key: util.generateRandomUUID(true),
+              title:"Redmi Note 13 Pro+",
+              price:1899,
+              tage:true
+            },
+            {
+              key: util.generateRandomUUID(true),
+              title:"Redmi Note 13 5G",
+              price:1099,
+              tage:true
+            },
+            {
+              key: util.generateRandomUUID(true),
+              title:"Redmi Note 12T Pro",
+              price:1399,
+              tage:false
+            },
+            {
+              key: util.generateRandomUUID(true),
+              title:"Redmi Note 12 Turbo",
+              price:1599,
+              tage:false
+            }
+          ]
+        },
+      ]
     }
   ]
-  @State productListResult:ProductItem = this.productList[this.menuIndex]
+  /*延迟滑动计数*/
+  private listScroller: Scroller = new Scroller();
 
 
 
@@ -118,14 +198,17 @@ export default  struct Category {
     Column(){
       Text("推荐").padding({top:10,left:10}).fontColor("#626262").fontSize(14)
       List(){
-
         ForEach(this.menuList,(item,index)=>{
           ListItem(){
             Row(){
               Row(){}.width(4).height(20).margin({right:8}).backgroundColor(this.menuIndex == index?"#fb6c04":"rgba(255,255,255,0)")
               Text(item).fontSize(14).fontWeight(this.menuIndex == index?500:400)
             }.width("100%").justifyContent(FlexAlign.Start)
-          }.height(40).width("100%").onClick(()=>{this.menuIndex = index;console.log("鸿蒙log")})
+          }.height(40).width("100%")
+          .onClick(()=>{
+            this.menuIndex = index;
+            this.listScroller.scrollToIndex(0)
+          })
         },(item,index)=>`${index}`)
 
       }.padding({top:10})
@@ -148,12 +231,11 @@ export default  struct Category {
   /*商品列表*/
   @Builder commodityComponent(){
     Column(){
-      List(){
+      List({scroller:this.listScroller}){
         ListItem(){
           Image($r("app.media.caregory_banner")).width("100%")
         }.margin({bottom:15})
-
-        ForEach(this.productListResult.data,(item:ProductItemData,index:number)=>{
+        ForEach(this.productList[this.menuIndex <= 1?this.menuIndex:1].data,(item:ProductItemData,index:number)=>{
           ListItemGroup({header:this.CCHeadTitle(item.subTag)}){
             ForEach(item.subData,(childItem:ProductItemSubData,childIndex:number)=>{
                 ListItem(){
@@ -186,11 +268,15 @@ export default  struct Category {
                   }.padding(4)
                   .backgroundColor("#f8f8f8")
                 }
-            },(childItem,ChildIndex)=>`${ChildIndex}`)
+            },(childItem)=>childItem.key)
           }.margin({top:10,bottom:10})
-        },(item,index)=>`${index}}`)
+        },(item)=>item.key)
 
-      }.margin({bottom:80}).sticky(StickyStyle.Header)
+      }.margin({bottom:80})
+      .sticky(StickyStyle.Header)
+      .onReachEnd(()=>{
+        hilog.info(10,"myLog","到底了")
+      })
     }.width("70%")
     .height("100%")
   }
