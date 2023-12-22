@@ -1,14 +1,38 @@
+import app from '@system.app';
+import promptAction from '@ohos.promptAction'
+
 import Home  from "./Home"
 import Category from "./Category"
 import Server from "./Server"
 import Car from "./Car"
 import My from "./My"
+
 @Entry
 @Component
 struct Tabber {
 
   @State tabsIndex:number = 1;
   private tabsController:TabsController = new TabsController();
+
+  // 记录上一次点击时间
+  private pretime: number = new Date().getTime();
+  onBackPress() {
+    let currentTime = new Date().getTime();
+    let flag = currentTime - this.pretime;
+    if (flag > 2000) {
+      promptAction.showToast({
+        message: "再按一次退出应用",
+        duration:3000
+      })
+      //两次点击时间太长不做处理
+      this.pretime = currentTime;
+      return true;
+    } else {
+      app.terminate(); // 2秒内点击，退出当前Ability。
+    }
+    return false;
+  }
+
 
   @Builder TabBarComponents(name:string,index:number,IconUrl:Resource,IconActivated:Resource){
     /*上图标下文字布局*/

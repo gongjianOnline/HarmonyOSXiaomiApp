@@ -95,7 +95,7 @@ export default struct Home {
         GridItem(){
           Column(){
             Image($r("app.media.shangxin")).width("80%").height(60).objectFit(ImageFit.Cover)
-            Text(this.scrollerTop+"").fontSize(12).margin({top:6})
+            Text("小米上新").fontSize(12).margin({top:6})
           }.onClick(()=>{this.scrollerTop = "false"})
         }
         GridItem(){
