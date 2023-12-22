@@ -1,3 +1,4 @@
+import router from "@ohos.router"
 @Entry
 @Component
 export default  struct My {
@@ -34,7 +35,14 @@ export default  struct My {
       Image($r("app.media.my_img")).width(80).borderRadius(100)
       Column(){
         Flex(){
-          Text("龚箭").fontSize(18).fontColor("#333333").margin({bottom:10})
+          Text("龚箭").fontSize(18)
+            .fontColor("#333333")
+            .margin({bottom:10})
+            .onClick(()=>{
+              router.pushUrl({
+                url:'pages/Login',
+              })
+            })
         }
         Flex(){
           Text(){
@@ -412,11 +420,10 @@ export default  struct My {
         ListItem(){this.RecommendList()}
 
 
-      }.padding({bottom:40})
+      }.padding({left:10,right:10,bottom:40})
 
     }.width("100%")
     .height("100%")
-    .padding(10)
     .backgroundColor("#f9f9f9")
   }
 }

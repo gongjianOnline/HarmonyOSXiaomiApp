@@ -4,10 +4,10 @@
     "pages/Home",
     "pages/Tabber",
     "pages/Category",
-    "pages/Page",
+    "pages/Login",
     "pages/Server",
     "pages/Car",
     "pages/My",
-    "pages/Page"
+    "pages/Login"
   ]
 }
