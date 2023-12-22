@@ -8,6 +8,7 @@
     "pages/Server",
     "pages/Car",
     "pages/My",
-    "pages/Login"
+    "pages/Login",
+    "pages/NewProduct"
   ]
 }

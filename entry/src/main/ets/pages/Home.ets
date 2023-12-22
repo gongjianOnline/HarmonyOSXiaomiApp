@@ -1,5 +1,6 @@
 import web_webview from '@ohos.web.webview';
 import hilog from '@ohos.hilog';
+import router from '@ohos.router';
 
 @Entry
 @Component
@@ -16,7 +17,6 @@ export default struct Home {
   /*相应滚动*/
   private listScroller: Scroller = new Scroller();
   @State scrollerTop:string = "true";
-  @State xxx:string = "123"
 
   /*头部搜索栏*/
   @Builder Header(){
@@ -96,7 +96,7 @@ export default struct Home {
           Column(){
             Image($r("app.media.shangxin")).width("80%").height(60).objectFit(ImageFit.Cover)
             Text("小米上新").fontSize(12).margin({top:6})
-          }.onClick(()=>{this.scrollerTop = "false"})
+          }.onClick(()=>{router.push({url:"pages/NewProduct"})})
         }
         GridItem(){
           Column(){
