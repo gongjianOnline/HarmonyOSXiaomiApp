@@ -27,7 +27,7 @@ struct Tabber {
     .justifyContent(FlexAlign.Center)
     .backgroundColor("#ffffff")
     .border({
-      width:{top:1},
+      width:{top:0.5},
       color:{top:"#dcdcdc"},
       style:{top:BorderStyle.Solid}
     })
@@ -69,7 +69,7 @@ struct Tabber {
         .tabBar(this.TabBarComponents("我的",4,$r('app.media.my'),$r("app.media.myActivated")))
       }
       .barWidth('100%')
-      .barHeight(60)
+      .barHeight(50)
       .onChange((index:number)=>{
         /*左右滑动可以切换页签*/
         this.tabsIndex = index

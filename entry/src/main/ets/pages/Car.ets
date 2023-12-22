@@ -86,7 +86,7 @@ export default  struct Car {
 
 
   build() {
-    Column(){
+    Flex({direction:FlexDirection.Column}){
       this.Header()
       List(){
         ListItem(){
@@ -100,10 +100,37 @@ export default  struct Car {
             this.CarListItem()
           }
         },(item,index)=>`${index}`)
-      }.padding({left:10,right:10,top:10,bottom:60})
+      }.padding({left:10,right:10,top:10})
       .width("100%")
-      .height("100%")
+      .flexGrow(1)
       .backgroundColor("#fff")
+
+      Row(){
+        Row(){
+          Checkbox({name:"all"}).select(false).width(15).height(15).selectedColor("#f05d4b")
+          Text("全选").fontSize(12).fontWeight(600).margin({left:4})
+        }
+        Row(){
+          Text(){
+            Span("合计").fontSize(14)
+            Span("(不含运费)").fontSize(11).fontColor("#7b7b7b")
+            Span(":").fontSize(11).fontColor("#7b7b7b")
+          }
+          Text(){
+            Span("￥")
+            Span("0")
+          }.fontColor("#e9631a").fontWeight(600).fontSize(14)
+
+          Button("结算").onClick((event: ClickEvent) => {
+            
+          }).backgroundColor("#fd750f").width(80).height(30).margin({left:10})
+        }
+      }.justifyContent(FlexAlign.SpaceBetween)
+      .width("100%")
+      .height(55)
+      .border({width:{top:0.5},color:'#d7d7d7'})
+      .backgroundColor("#fff")
+      .padding({left:10,right:10})
 
     }
     .backgroundColor("#f3f3f3")
