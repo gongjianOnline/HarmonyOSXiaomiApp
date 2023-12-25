@@ -108,7 +108,7 @@ export default struct Home {
           Column(){
             Image($r("app.media.fabu")).width("80%").height(60).objectFit(ImageFit.Cover)
             Text("小米发布").fontSize(12).margin({top:6})
-          }
+          }.onClick(()=>{router.push({url:"pages/webView",params:{webType:'local',url:"sendPage"}})})
         }
         GridItem(){
           Column(){
