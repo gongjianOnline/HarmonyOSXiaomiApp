@@ -9,6 +9,7 @@
     "pages/Car",
     "pages/My",
     "pages/Login",
-    "pages/NewProduct"
+    "pages/NewProduct",
+    "pages/Crowdfunding"
   ]
 }
