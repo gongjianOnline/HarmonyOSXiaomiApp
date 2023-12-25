@@ -3,10 +3,64 @@
   padding: 0px;
   box-sizing: border-box;
 }
+.paddingBottom20{
+  padding-bottom: 20px;
+}
 .wrapper{
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background:#f1f1f1
 }
-.wrapper img{
+.content{
+  flex: 1;
+  background:f1f1f1;
+  overflow: auto;
+  padding-top: 35px;
+  padding-bottom: 50px;
+}
+.content img{
   width: 100%;
+}
+.contentTitle{
+  padding: 20px 0px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.tabBarContainer{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #fff;
+}
+.icon{
+  width: 1.5em;
+  height: 1.5em;
+  fill: #a09fa5;
+}
+.tabBarItem{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color:#a09fa5;
+}
+.tabBarLabel{
+  font-size: 14px;
+  margin-top:10px
+}
+.activeIcon{
+  fill: #000000 !important;
+}
+.activeLabel{
+  color:#000 !important;
 }

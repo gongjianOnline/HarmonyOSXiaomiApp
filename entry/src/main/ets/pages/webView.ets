@@ -14,17 +14,23 @@ struct WebView {
   /*黏贴布局*/
   avoidArea = globalThis.avoidArea;
   /*相应滚动*/
-  @State scrollerTop:string = "true";
+  @State scrollerTop:string = "false";
 
   build() {
     Column(){
       Stack({alignContent:Alignment.TopStart }){
         HeaderComponent({
-          titleName:"",
+          titleName:"小米发布",
           avoidArea:(this.avoidArea / 1.4),
           scrollerTop:$scrollerTop
         })
         Web({src:$rawfile(`${this.url}.html`),controller:this.webviewController})
+          .javaScriptAccess(true)
+          .zoomAccess(false)
+          .onConfirm((event)=>{
+            console.log(`打印------${event.message}`)
+            return true
+          })
       }
 
     }.height("100%")
