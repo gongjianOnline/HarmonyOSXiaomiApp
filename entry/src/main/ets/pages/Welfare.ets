@@ -7,6 +7,7 @@ struct Welfare {
 
   @State tabsIndex: number = 0
   private tabsController: TabsController = new TabsController()
+  private listScroller: Scroller = new Scroller();
 
   /*banner图*/
   @Builder Banner(){
@@ -56,6 +57,7 @@ struct Welfare {
       .barMode(BarMode.Scrollable)
       .onChange((index: number) => {
         this.tabsIndex = index
+        this.listScroller.scrollToIndex(index)
       })
     }.width("100%")
     .height(50)
@@ -130,14 +132,17 @@ struct Welfare {
     Flex({direction:FlexDirection.Column}){
       HeaderComponent({
         scrollerTop:$scrollerTop,
-        avoidArea:(this.avoidArea / 1.4),
+        avoidArea:(this.avoidArea / 1.1),
         titleName:"新人福利"
       })
       Column(){
         this.Banner()
         this.Tabber()
-      }.padding({left:10,right:10})
-      List(){
+      }.width("100%")
+        .height(160)
+        .padding({left:10,right:10})
+        .margin({top:2})
+      List({initialIndex:this.tabsIndex,scroller:this.listScroller}){
         ListItemGroup({header:this.ListTitle("定制优惠")}){
           ForEach([0,1,2,3,4,5,6,7,8,9,10],()=>{
             ListItem(){this.Customized()}
@@ -154,7 +159,6 @@ struct Welfare {
       }.flexGrow(1)
       .padding({left:10,right:10})
       .sticky(StickyStyle.Header)
-      .margin({top:20})
       .onScrollIndex((start:number,end:number)=>{
         this.tabsIndex = end
       })
