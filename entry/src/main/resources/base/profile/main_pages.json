@@ -12,6 +12,7 @@
     "pages/NewProduct",
     "pages/Crowdfunding",
     "pages/webView",
-    "pages/Commodity"
+    "pages/Commodity",
+    "pages/Welfare"
   ]
 }

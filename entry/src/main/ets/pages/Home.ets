@@ -114,7 +114,7 @@ export default struct Home {
           Column(){
             Image($r("app.media.fuli")).width("80%").height(60).objectFit(ImageFit.Cover)
             Text("新人福利").fontSize(12).margin({top:6})
-          }
+          }.onClick(()=>{router.pushUrl({url:"pages/Welfare"})})
         }
         GridItem(){
           Column(){
@@ -126,31 +126,31 @@ export default struct Home {
           Column(){
             Image($r("app.media.chuandai")).width("80%").height(60).objectFit(ImageFit.Cover)
             Text("智能穿戴").fontSize(12).margin({top:6})
-          }
+          }.onClick(()=>{router.pushUrl({url:"pages/Category"})})
         }
         GridItem(){
           Column(){
             Image($r("app.media.diannao")).width("80%").height(60).objectFit(ImageFit.Cover)
             Text("电脑/平板").fontSize(12).margin({top:6})
-          }
+          }.onClick(()=>{router.pushUrl({url:"pages/Category"})})
         }
         GridItem(){
           Column(){
             Image($r("app.media.shouji")).width("80%").height(60).objectFit(ImageFit.Cover)
             Text("手机").fontSize(12).margin({top:6})
-          }
+          }.onClick(()=>{router.pushUrl({url:"pages/Category"})})
         }
         GridItem(){
           Column(){
             Image($r("app.media.dianshi")).width("80%").height(60).objectFit(ImageFit.Cover)
             Text("电视").fontSize(12).margin({top:6})
-          }
+          }.onClick(()=>{router.pushUrl({url:"pages/Category"})})
         }
         GridItem(){
           Column(){
             Image($r("app.media.bingxiang")).width("80%").height(60).objectFit(ImageFit.Cover)
             Text("空冰洗").fontSize(12).margin({top:6})
-          }
+          }.onClick(()=>{router.pushUrl({url:"pages/Category"})})
         }
       }
         .width("100%")
