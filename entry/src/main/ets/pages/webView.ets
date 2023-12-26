@@ -28,7 +28,10 @@ struct WebView {
           .javaScriptAccess(true)
           .zoomAccess(false)
           .onConfirm((event)=>{
-            console.log(`打印------${event.message}`)
+            let result = JSON.parse(event.message)
+            router.push({
+              url:`pages/${result.routerName}`
+            })
             return true
           })
       }

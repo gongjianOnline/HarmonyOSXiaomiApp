@@ -12,7 +12,7 @@ import router from '@ohos.router';
 @Component
 struct Tabber {
 
-  @State tabsIndex:number = 1;
+  @State tabsIndex:number = 0;
   private tabsController:TabsController = new TabsController();
 
   // 记录上一次点击时间
