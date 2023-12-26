@@ -11,6 +11,7 @@
     "pages/Login",
     "pages/NewProduct",
     "pages/Crowdfunding",
-    "pages/webView"
+    "pages/webView",
+    "pages/Commodity"
   ]
 }
