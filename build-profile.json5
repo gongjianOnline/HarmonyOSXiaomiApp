@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\admin\\.ohos\\config\\auto_debug_HarmonyOSXiaomiApp_com.example.xioami_80086000141737417.cer",
-          "storePassword": "0000001A6A6B56742729200E26ADDAFE0BFCE30B5AF3BC623D940C05A539FCE22FEEE42B8AE7D096F011",
+          "certpath": "C:\\Users\\15031\\.ohos\\config\\auto_debug_xiaomi_com.example.xioami_80086000141737417.cer",
+          "storePassword": "0000001BBCBC85E730D4E1CEFEB9A4BEB9AE29078B1BDA5E96CD91D97BCAB69C03E5D85E4D7F8A7871DCE7",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001A0D2ABD8286ACB63014B0F09F99267BEC8B4BC186D11ACC7C6D2B639C1BDEFE1AD8F41061C857",
-          "profile": "C:\\Users\\admin\\.ohos\\config\\auto_debug_HarmonyOSXiaomiApp_com.example.xioami_80086000141737417.p7b",
+          "keyPassword": "0000001BDD8CB6CDA35BDB2ED85288A70311F4286D5F865377582599ED59B854F3E14ED3CD666D55C5A51B",
+          "profile": "C:\\Users\\15031\\.ohos\\config\\auto_debug_xiaomi_com.example.xioami_80086000141737417.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\admin\\.ohos\\config\\auto_debug_HarmonyOSXiaomiApp_com.example.xioami_80086000141737417.p12"
+          "storeFile": "C:\\Users\\15031\\.ohos\\config\\auto_debug_xiaomi_com.example.xioami_80086000141737417.p12"
         }
       }
     ],

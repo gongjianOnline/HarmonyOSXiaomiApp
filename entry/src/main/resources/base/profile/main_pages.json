@@ -13,6 +13,7 @@
     "pages/Crowdfunding",
     "pages/webView",
     "pages/Commodity",
-    "pages/Welfare"
+    "pages/Welfare",
+    "pages/Member"
   ]
 }

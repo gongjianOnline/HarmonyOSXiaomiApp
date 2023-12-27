@@ -120,7 +120,7 @@ export default struct Home {
           Column(){
             Image($r("app.media.zhuanxiang")).width("80%").height(60).objectFit(ImageFit.Cover)
             Text("会员专享").fontSize(12).margin({top:6})
-          }
+          }.onClick(()=>{router.pushUrl({url:"pages/Member"})})
         }
         GridItem(){
           Column(){
