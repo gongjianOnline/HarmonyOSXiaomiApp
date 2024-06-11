@@ -1,8 +1,20 @@
 import router from '@ohos.router';
+import promptAction from '@ohos.promptAction'
+import Storage from "../utils/storage"
+
+
 @Entry
 @Component
 struct Page {
   avoidArea = globalThis.avoidArea;
+
+  storage = new Storage();
+
+  @State userName:string = "";
+  @State password:string = "";
+  @State activeState:boolean = false;
+
+  @StorageLink('isLogin') isLogin: string = '登录'
 
   /*标题*/
   @Builder Header(){
@@ -40,7 +52,13 @@ struct Page {
         Text("小米账号登录").margin({top:10,bottom:80})
 
         Row(){
-          TextInput({placeholder:"邮箱/手机号码/小米ID"}).borderRadius(10).padding({top:13,bottom:13}).caretColor("#7f7f7f")
+          TextInput({placeholder:"邮箱/手机号码/小米ID"})
+            .borderRadius(10)
+            .padding({top:13,bottom:13})
+            .caretColor("#7f7f7f")
+            .onChange((value: string) => {
+              this.userName = value;
+            })
         }.margin({bottom:20})
         Row(){
           TextInput({placeholder:"密码"})
@@ -48,9 +66,19 @@ struct Page {
             .padding({top:13,bottom:13})
             .type(InputType.Password)
             .caretColor("#7f7f7f")
+            .onChange((value: string) => {
+              this.password = value;
+            })
         }.margin({bottom:20})
         Row(){
-          Checkbox({name: 'agree',  group: 'checkboxGroup'}).select(true).selectedColor("#fd5902").width(14).height(14)
+          Checkbox({name: 'agree',  group: 'checkboxGroup'})
+            .select(this.activeState)
+            .selectedColor("#fd5902")
+            .width(14)
+            .height(14)
+            .onChange((value:boolean)=>{
+              this.activeState = value
+            })
           Text(){
             Span("已阅读并同意").fontColor("#808080").fontSize(12)
             Span("《小米商城用户协议》《小米商城隐私政策》《小米账号用户协议》《小米账号隐私政策》").fontColor("#fd5902").fontSize(12)
@@ -58,7 +86,23 @@ struct Page {
         }.margin({bottom:20})
 
         Row(){
-          Button("登录").backgroundColor("#fd5902").borderRadius(6).width("100%")
+          Button("登录")
+            .backgroundColor("#fd5902")
+            .borderRadius(6)
+            .width("100%")
+            .onClick(()=>{
+              if(!this.activeState){
+                promptAction.showToast({
+                  message: "同意相关规定后登录",
+                  duration:3000,
+                  bottom:300
+                })
+              }else{
+                // this.storage.setItem("userName",this.userName)
+                this.isLogin = this.userName
+                router.back()
+              }
+            })
         }
 
       }.flexGrow(1)

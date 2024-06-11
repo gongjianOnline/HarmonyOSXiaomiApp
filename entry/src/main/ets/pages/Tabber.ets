@@ -35,6 +35,10 @@ struct Tabber {
   }
 
 
+  aboutToAppear(){
+
+  }
+
   @Builder TabBarComponents(name:string,index:number,IconUrl:Resource,IconActivated:Resource){
     /*上图标下文字布局*/
     Column(){

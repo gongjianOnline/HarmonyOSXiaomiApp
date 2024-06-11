@@ -1,4 +1,8 @@
 import router from "@ohos.router"
+import Storage from "../utils/storage"
+
+PersistentStorage.PersistProp("isLogin", "登录")
+
 @Entry
 @Component
 export default  struct My {
@@ -7,6 +11,16 @@ export default  struct My {
   swiperController: SwiperController = new SwiperController()
 
   avoidArea = globalThis.avoidArea;
+
+  storage = new Storage();
+  @StorageLink('isLogin') isLogin: string = '登录'
+
+  /*页面初始化*/
+  async aboutToAppear(){
+    // let result = await this.storage.getItem("userName","登录");
+    // this.isLogin = `${result}`;
+    // console.log("打印了----")
+  }
 
   /*标题*/
   @Builder Header(){
@@ -32,10 +46,10 @@ export default  struct My {
   /*用户信息*/
   @Builder InfoComponent(){
     Flex({alignItems:ItemAlign.Center}){
-      Image($r("app.media.my_img")).width(80).borderRadius(100)
+      Image(this.isLogin == "登录"?$r("app.media.userDefind"):$r("app.media.my_img")).width(80).borderRadius(100)
       Column(){
         Flex(){
-          Text("龚箭").fontSize(18)
+          Text(this.isLogin === "登录"?"登录":this.isLogin).fontSize(18)
             .fontColor("#333333")
             .margin({bottom:10})
             .onClick(()=>{
@@ -54,7 +68,7 @@ export default  struct My {
             Span("成长值")
             Span("896")
           }.fontSize(12).backgroundColor("#efefef").padding({left:6,right:6,top:4,bottom:4}).borderRadius(10)
-        }
+        }.opacity(this.isLogin==="登录"?0:1)
 
       }.flexGrow(1)
       .padding({left:10})

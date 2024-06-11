@@ -1,6 +1,7 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import hilog from '@ohos.hilog';
 import window from '@ohos.window';
+import dataPreferences from '@ohos.data.preferences';
 
 export default class EntryAbility extends UIAbility {
   onCreate(want, launchParam) {
@@ -11,6 +12,17 @@ export default class EntryAbility extends UIAbility {
       // 隐藏顶部状态栏背景
       windowClass.setWindowLayoutFullScreen(true);
     })
+
+    /*首选项数据存储*/
+    try{
+      dataPreferences.getPreferences(this.context,"myStore",(err,preferences)=>{
+        if(err){console.error("报错了");return}
+        /*使用 globalThis 方式可以让全局应用公用该属性*/
+        globalThis.entryAbilityPreferences = preferences;
+      })
+    }catch (error){
+      console.error("报错了")
+    }
 
     window.getLastWindow(this.context, (err, data) => {
       let type = window.AvoidAreaType.TYPE_SYSTEM;
